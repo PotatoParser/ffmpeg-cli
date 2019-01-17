@@ -2,17 +2,21 @@
 A simple way of implementing FFmpeg regardless of OS
 ```javascript
 const ffmpeg = require("ffmpeg-cli");
-ffmpeg.run("-version"); // Asynchronous
-ffmpeg.run("-version", (error, result)=>{});
+ffmpeg.run("-version");
 console.log(ffmpeg.runSync("-version"));
+```
+## Synchronous Commands
+```javascript
+ffmpeg.runSync(commands);
+// Ex: ffmpeg.runSync(`-i input.jpg -vf scale=320:240 output.png`);
 ```
 ## Asynchronous Commands
 Returns a promise
 ```javascript
-ffmpeg.run("-version");
-ffmpeg.run("-version").catch((error)=>{...}); // Catch errors
-ffmpeg.run("-version").then((result)=>{...}); // Only results
-ffmpeg.run("-version").then((result)=>{...}).catch((error)=>{...}); // Catches when errors found
+ffmpeg.run(commands);
+ffmpeg.run(commands).catch((error)=>{...}); // Catch errors
+ffmpeg.run(commands).then((result)=>{...}); // Only results
+ffmpeg.run(commands).then((result)=>{...}).catch((error)=>{...}); // Catches when errors found
 ```
 ## Supported OS
 + MacOS ~ 64 bit
