@@ -1,0 +1,27 @@
+{
+  "name": "ffmpeg-cli",
+  "version": "0.1.0",
+  "description": "ffmpeg with support for multiple OSs",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [
+    "ffmpeg",
+    "video",
+    "audio",
+    "image",
+    "media",
+    "cli"
+  ],
+  "author": "Wilson Nguyen",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PotatoParser/ffmpeg-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PotatoParser/ffmpeg-cli/issues"
+  },
+  "homepage": "https://github.com/PotatoParser/ffmpeg-cli#readme"
+}
