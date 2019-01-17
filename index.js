@@ -18,9 +18,16 @@ const allOS = {
 if (allOS[OS] === undefined) console.error(new Error("OS not supporteds!"));
 if (allOS[OS][BIT] === undefined) console.error(new Error("Invalid OS and CPU architecture!"));
 module.exports = class FFMPEG {
-	static async run(cmd, cb){
-		if (!cb) cb = ()=>{};
-		return cp.exec(`"${allOS[OS][BIT]}" ${cmd}`, {encoding: "utf8"}, cb);
+	static async run(cmd){
+		var temp = await new Promise((resolve, reject)=>{
+			var err = (data)=>{throw data;}
+			cp.exec(`"${allOS[OS][BIT]}" ${cmd}`, {encoding: "utf8"}, (error, out)=>{
+				if (error) resolve(error);
+				else resolve(out);
+			});
+		});
+		if (temp.code) throw temp;
+		return temp;
 	}
 	static runSync(cmd){
 		return cp.execSync(`"${allOS[OS][BIT]}" ${cmd}`, {encoding: "utf8"});
