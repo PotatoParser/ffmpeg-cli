@@ -15,7 +15,7 @@
     "cli"
   ],
   "author": "Wilson Nguyen",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/PotatoParser/ffmpeg-cli.git"
