@@ -6,6 +6,7 @@ ffmpeg.run("-version");
 console.log(ffmpeg.runSync("-version"));
 ```
 ## Synchronous Commands
+Returns the output from FFmpeg
 ```javascript
 ffmpeg.runSync(commands);
 // Ex: ffmpeg.runSync(`-i input.jpg -vf scale=320:240 output.png`);
