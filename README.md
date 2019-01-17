@@ -6,6 +6,14 @@ ffmpeg.run("-version"); // Asynchronous
 ffmpeg.run("-version", (error, result)=>{});
 console.log(ffmpeg.runSync("-version"));
 ```
+## Asynchronous Commands
+Returns a promise
+```javascript
+ffmpeg.run("-version");
+ffmpeg.run("-version").catch((error)=>{...}); // Catch errors
+ffmpeg.run("-version").then((result)=>{...}); // Only results
+ffmpeg.run("-version").then((result)=>{...}).catch((error)=>{...}); // Catches when errors found
+```
 ## Supported OS
 + MacOS ~ 64 bit
 + Linux ~ 32/64 bit
