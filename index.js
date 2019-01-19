@@ -1,6 +1,7 @@
 const cp = require("child_process");
 const OS = process.platform;
 const BIT = process.arch;
+const fs = require("fs");
 if (!(BIT === "x32" || BIT === "x64")) console.error(new Error("CPU architecture not supported"));
 const OSURL = {
 	linux: {
@@ -48,18 +49,18 @@ const allOS = {
 	win32: {
 		x32: {
 			url: "https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-latest-win32-static.zip",
-			path: __dirname + "/ffmpeg/win32x32/bin/ffmpeg"
+			path: __dirname + "/ffmpeg/win32x32/bin/ffmpeg.exe"
 		},
 		x64: {
 			url: "https://ffmpeg.zeranoe.com/builds/win64/static/ffmpeg-latest-win64-static.zip",
-			path: __dirname + "/ffmpeg/win32x64/bin/ffmpeg"
+			path: __dirname + "/ffmpeg/win32x64/bin/ffmpeg.exe"
 		}
 	}
 }
 if (allOS[OS] === undefined) console.error(new Error("OS not supporteds!"));
 if (allOS[OS][BIT] === undefined) console.error(new Error("Invalid OS and CPU architecture!"));
-if (!fs.existsSync(allOS[OS][BIT])) cp.execSync(`node download.js ${allOS[OS][BIT].url} ${OS}${BIT}`, {cwd: process.cwd()});
-module.exports = class FFMPEG {
+if (!fs.existsSync(allOS[OS][BIT].path)) cp.execSync(`node download.js ${allOS[OS][BIT].url} ${OS}${BIT}`, {cwd: process.cwd(), stdio: "inherit"});
+class FFmpeg {
 	static async run(cmd){
 		var temp = await new Promise((resolve, reject)=>{
 			var err = (data)=>{throw data;}
@@ -75,3 +76,9 @@ module.exports = class FFMPEG {
 		return cp.execSync(`"${allOS[OS][BIT].path}" ${cmd}`, {encoding: "utf8"});
 	}
 }
+try {
+	FFmpeg.runSync("-version");
+} catch(err) {
+	cp.execSync(`node download.js ${allOS[OS][BIT].url} ${OS}${BIT}`, {cwd: process.cwd(), stdio: "inherit"});
+}
+module.exports = FFmpeg;
