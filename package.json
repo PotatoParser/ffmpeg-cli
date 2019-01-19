@@ -25,7 +25,8 @@
   },
   "homepage": "https://github.com/PotatoParser/ffmpeg-cli#readme",
   "dependencies": {
-    "request": "^2.88.0",
-    "tar": "^4.4.8"
+    "decompress": "^4.2.0",
+    "decompress-tarxz": "^2.1.1",
+    "request": "^2.88.0"
   }
 }
