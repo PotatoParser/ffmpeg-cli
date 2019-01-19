@@ -1,6 +1,6 @@
 {
   "name": "ffmpeg-cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "ffmpeg with support for multiple OSs",
   "main": "index.js",
   "scripts": {
