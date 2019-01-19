@@ -4,7 +4,8 @@
   "description": "ffmpeg with support for multiple OSs",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "node test.js",
+    "install": "node download.js"
   },
   "keywords": [
     "ffmpeg",
