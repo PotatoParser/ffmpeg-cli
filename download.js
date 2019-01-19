@@ -3,16 +3,41 @@ const request = require("request");
 const decompress = require('decompress');
 const decompressTarxz = require('decompress-tarxz');
 const decompressUnzip = require('decompress-unzip');
+const ProgressBar = require("progress");
+const ora = require("ora");
 const chalk = require("chalk");
+const system = require(__dirname + "/verify.js");
+function error(text){
+	console.log(chalk.bold.red("ERROR! ") + chalk.white("[ffmpeg-cli]") + " " + new Error(text));
+}
+function output(text){
+	return chalk.white("[ffmpeg-cli]") + " " + text;
+}
 async function getPackage(url, type){
-	console.log(chalk.black.bgGreenBright("Downloading FFmpeg..."));
+	if (url.indexOf("http") === -1) 
+		error("Unable to parse link");
 	var finalName = url.substring(url.lastIndexOf("/")+1);
 	var filePath = `${__dirname}/ffmpeg/${finalName}`;
 	if (!fs.existsSync(`${__dirname}/ffmpeg`)) fs.mkdirSync(`${__dirname}/ffmpeg`);
-	await new Promise((resolve)=>{
-		request(url).pipe(fs.createWriteStream(filePath)).on("finish", ()=>resolve());
+	var downloaded = await new Promise((resolve)=>{
+		var file = request(url);
+		file.on("error", ()=>resolve(false));
+		file.pipe(fs.createWriteStream(filePath)).on("finish", ()=>resolve(true));
+		file.on("response", (c)=>{
+			var totalData = parseInt(c.headers['content-length'], 10);
+			var bar = new ProgressBar(chalk.white("[ffmpeg-cli]") + ' Downloading: [:bar] :percent :etas', {
+		    complete: chalk.bgGreenBright(' '),
+		    incomplete: chalk.magenta('.'),
+		    width: 20,
+		    total: totalData
+		  });
+			file.on("data", (c)=>{
+				bar.tick(c.length);
+			});
+		})
 	});
-	console.log(chalk.black.bgGreenBright("Unzipping files..."));
+	if (!downloaded) error("Unable to download files");
+	const spinner = ora({spinner: {interval: 80, frames: [output('Unzipping files'), output('Unzipping files.'), output('Unzipping files..'), output('Unzipping files...')]}}).start();
 	var temp;
 	if (finalName.indexOf(".xz") !== -1) {
 		temp = await new Promise((resolve)=>{
@@ -23,46 +48,15 @@ async function getPackage(url, type){
 	} else {
 		temp = await new Promise((resolve)=>{
 			decompress(filePath, 'ffmpeg', {
-				plugins: [decompressUnzip()]
+				plugins: [decompressUnzip()],
 			}).then((file)=>resolve(file));
 		});
 	}
+	spinner.stop();
+	console.log(output("Unzipped file"));
 	fs.unlinkSync(filePath);
 	fs.renameSync(`${__dirname}/ffmpeg/${temp[0].path}`, `${__dirname}/ffmpeg/${type}`);
-	console.log(chalk.black.bgGreenBright("Download complete!"));
+	console.log(output("FFmpeg downloaded!"));
 }
-const OS = process.platform;
-const BIT = process.arch;
-if (!(BIT === "x32" || BIT === "x64")) console.error(new Error("CPU architecture not supported"));
-const allOS = {
-	linux: {
-		x32: {
-			url: "https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz",
-			path: __dirname + "/ffmpeg/linuxx32/ffmpeg"
-		},
-		x64: {
-			url: "https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-i686-static.tar.xz",
-			path: __dirname + "/ffmpeg/linuxx64/ffmpeg"
-		}
-	},
-	darwin: {
-		x64: {
-			url: "https://ffmpeg.zeranoe.com/builds/macos64/static/ffmpeg-latest-macos64-static.zip",
-			path: __dirname + "/ffmpeg/darwinx64/bin/ffmpeg"
-		}
-	},
-	win32: {
-		x32: {
-			url: "https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-latest-win32-static.zip",
-			path: __dirname + "/ffmpeg/win32x32/bin/ffmpeg.exe"
-		},
-		x64: {
-			url: "https://ffmpeg.zeranoe.com/builds/win64/static/ffmpeg-latest-win64-static.zip",
-			path: __dirname + "/ffmpeg/win32x64/bin/ffmpeg.exe"
-		}
-	}
-}
-if (allOS[OS] === undefined) console.error(new Error("OS not supporteds!"));
-if (allOS[OS][BIT] === undefined) console.error(new Error("Invalid OS and CPU architecture!"));
 if (process.argv.length !== 2) getPackage(process.argv[2], process.argv[3]);
-else getPackage(allOS[OS][BIT].url,`${OS}${BIT}`);
+else getPackage(system.url,`${process.platform}${process.arch}`);
