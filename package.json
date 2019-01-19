@@ -23,5 +23,9 @@
   "bugs": {
     "url": "https://github.com/PotatoParser/ffmpeg-cli/issues"
   },
-  "homepage": "https://github.com/PotatoParser/ffmpeg-cli#readme"
+  "homepage": "https://github.com/PotatoParser/ffmpeg-cli#readme",
+  "dependencies": {
+    "request": "^2.88.0",
+    "tar": "^4.4.8"
+  }
 }
