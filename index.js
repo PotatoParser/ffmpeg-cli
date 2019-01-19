@@ -1,7 +1,7 @@
 const cp = require("child_process");
 const fs = require("fs");
 const system = require(__dirname + "/verify.js");
-if (!fs.existsSync(system.path)) cp.execSync(`node --no-warnings download.js ${system.url} ${process.platform}${process.arch}`, {cwd: process.cwd(), stdio: "inherit"});
+if (!fs.existsSync(system.path)) cp.execSync(`node --no-warnings ${__dirname}/download.js ${system.url} ${process.platform}${process.arch}`, {cwd: process.cwd(), stdio: "inherit"});
 class FFmpeg {
 	static async run(cmd){
 		var temp = await new Promise((resolve, reject)=>{
@@ -18,9 +18,10 @@ class FFmpeg {
 		return cp.execSync(`"${system.path}" ${cmd}`, {encoding: "utf8"});
 	}
 }
+// Check for possible corruption
 try {
 	FFmpeg.runSync("-version");
 } catch(err) {
-	cp.execSync(`node download.js ${system.url} ${process.platform}${process.arch}`, {cwd: process.cwd(), stdio: "inherit"});
+	cp.execSync(`node --no-warnings ${__dirname}/download.js ${system.url} ${process.platform}${process.arch}`, {cwd: process.cwd(), stdio: "inherit"});
 }
 module.exports = FFmpeg;
