@@ -1,7 +1,8 @@
 const cp = require("child_process");
-const OS = process.platform;
-const BIT = process.arch;
 const fs = require("fs");
+const system = require(__dirname + "/verify.js");
+/*const OS = process.platform;
+const BIT = process.arch;
 if (!(BIT === "x32" || BIT === "x64")) console.error(new Error("CPU architecture not supported"));
 const allOS = {
 	linux: {
@@ -32,13 +33,15 @@ const allOS = {
 	}
 }
 if (allOS[OS] === undefined) console.error(new Error("OS not supporteds!"));
-if (allOS[OS][BIT] === undefined) console.error(new Error("Invalid OS and CPU architecture!"));
-if (!fs.existsSync(allOS[OS][BIT].path)) cp.execSync(`node download.js ${allOS[OS][BIT].url} ${OS}${BIT}`, {cwd: process.cwd(), stdio: "inherit"});
+if (allOS[OS][BIT] === undefined) console.error(new Error("Invalid OS and CPU architecture!"));*/
+
+//if (!fs.existsSync(allOS[OS][BIT].path)) cp.execSync(`node --no-warnings download.js ${allOS[OS][BIT].url} ${OS}${BIT}`, {cwd: process.cwd(), stdio: "inherit"});
+if (!fs.existsSync(system.path)) cp.execSync(`node --no-warnings download.js ${system.url} ${process.platform}${process.arch}`, {cwd: process.cwd(), stdio: "inherit"});
 class FFmpeg {
 	static async run(cmd){
 		var temp = await new Promise((resolve, reject)=>{
 			var err = (data)=>{throw data;}
-			cp.exec(`"${allOS[OS][BIT].path}" ${cmd}`, {encoding: "utf8"}, (error, out)=>{
+			cp.exec(`"${system.path}" ${cmd}`, {encoding: "utf8"}, (error, out)=>{
 				if (error) resolve(error);
 				else resolve(out);
 			});
@@ -47,12 +50,12 @@ class FFmpeg {
 		return temp;
 	}
 	static runSync(cmd){
-		return cp.execSync(`"${allOS[OS][BIT].path}" ${cmd}`, {encoding: "utf8"});
+		return cp.execSync(`"${system.path}" ${cmd}`, {encoding: "utf8"});
 	}
 }
 try {
 	FFmpeg.runSync("-version");
 } catch(err) {
-	cp.execSync(`node download.js ${allOS[OS][BIT].url} ${OS}${BIT}`, {cwd: process.cwd(), stdio: "inherit"});
+	cp.execSync(`node download.js ${system.url} ${process.platform}${process.arch}`, {cwd: process.cwd(), stdio: "inherit"});
 }
 module.exports = FFmpeg;
