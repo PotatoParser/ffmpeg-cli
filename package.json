@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "node test.js",
-    "postinstall": "node download.js"
+    "postinstall": "node ./download.js"
   },
   "keywords": [
     "ffmpeg",
