@@ -7,6 +7,11 @@ const ffmpeg = require("ffmpeg-cli");
 ffmpeg.run("-version");
 console.log(ffmpeg.runSync("-version"));
 ```
+## Supported OS
++ MacOS ~ 64 bit
++ Linux ~ 32/64 bit
++ Windows ~ 32/64 bit
+
 ## Synchronous Commands
 Returns the output from FFmpeg
 ```javascript
@@ -21,10 +26,6 @@ ffmpeg.run(commands).catch((error)=>{...}); // Catch errors
 ffmpeg.run(commands).then((result)=>{...}); // Only results
 ffmpeg.run(commands).then((result)=>{...}).catch((error)=>{...}); // Catches when errors found
 ```
-## Supported OS
-+ MacOS ~ 64 bit
-+ Linux ~ 32/64 bit
-+ Windows ~ 32/64 bit
 
 ## FFmpeg Documentation
 [FFmpeg's Official Documentation](https://www.ffmpeg.org/ffmpeg.html)
