@@ -1,23 +1,64 @@
 const fs = require("fs");
 const request = require("request");
-const decompress = require('decompress');
-const decompressTarxz = require('decompress-tarxz');
-const decompressUnzip = require('decompress-unzip');
+const tar = require("tar");
+const extract = require("extract-zip");
+const lzma = require("lzma-native");
 const ProgressBar = require("progress");
-const ora = require("ora");
-const chalk = require("chalk");
 const system = require(__dirname + "/verify.js");
 function error(text){
-	console.log(chalk.bold.red("ERROR! ") + chalk.white("[ffmpeg-cli]") + " " + new Error(text));
+	console.error(`\x1b[1m\x1b[31mERROR! \x1b[0m\x1b[37m[ffmpeg-cli]\x1b[0m ${new Error(text)}`);
 }
 function output(text){
-	return chalk.white("[ffmpeg-cli]") + " " + text;
+	return `\x1b[37m[ffmpeg-cli]\x1b[0m ${text}`
 }
+function decompressXZ(file) {
+	return new Promise(resolve=>{
+		let temp = fs.readFileSync(file);
+		lzma.decompress(temp, (fin)=>{
+			let inside = file.substring(0, file.lastIndexOf("."));
+			fs.writeFileSync(inside, fin);
+			let path;
+			let t = tar.x({file: inside, 
+				sync: true, 
+				strict: true, 
+				cwd: file.substring(0, file.lastIndexOf("/")), 
+				onentry: (o)=>{
+					try {
+						let tmp = o.header.path;
+						if (tmp) path = tmp.substring(0, tmp.indexOf("/"));
+					} catch(e){}
+				}
+			});
+			fs.unlinkSync(inside);
+			resolve(`${__dirname}/ffmpeg/${path}`);
+		});
+	});
+}
+function decompressZip(file) {
+	return new Promise(resolve=>{
+		let dir = file.substring(0, file.lastIndexOf("."));
+		extract(file, {dir: `${__dirname}/ffmpeg`}, e=>{
+			if (!e) resolve(dir);
+		});
+	});
+}
+
+function rimraf(dir){
+	let temp = fs.readdirSync(dir);
+	for (let i = 0; i < temp.length; i++) {
+		let file = fs.statSync(`${dir}/${temp[i]}`).isFile();
+		if (file) {
+			fs.unlinkSync(`${dir}/${temp[i]}`);
+		} else rimraf(`${dir}/${temp[i]}`);
+	}
+	fs.rmdirSync(dir);
+}
+
 async function getPackage(url, type){
-	if (url.indexOf("http") === -1) 
-		error("Unable to parse link");
+	if (url.indexOf("http") === -1) error("Unable to parse link");
 	var finalName = url.substring(url.lastIndexOf("/")+1);
 	var filePath = `${__dirname}/ffmpeg/${finalName}`;
+	if (fs.existsSync(`${__dirname}/ffmpeg/${type}`)) rimraf(`${__dirname}/ffmpeg/${type}`);	
 	if (!fs.existsSync(`${__dirname}/ffmpeg`)) fs.mkdirSync(`${__dirname}/ffmpeg`);
 	var downloaded = await new Promise((resolve)=>{
 		var file = request(url);
@@ -25,37 +66,29 @@ async function getPackage(url, type){
 		file.pipe(fs.createWriteStream(filePath)).on("finish", ()=>resolve(true));
 		file.on("response", (c)=>{
 			var totalData = parseInt(c.headers['content-length'], 10);
-			var bar = new ProgressBar(chalk.white("[ffmpeg-cli]") + ' Downloading: [:bar] :percent :etas', {
-		    complete: chalk.bgGreenBright(' '),
-		    incomplete: chalk.magenta('.'),
-		    width: 20,
-		    total: totalData
-		  });
+			//chalk.white("[ffmpeg-cli]") + ' Downloading: [:bar] :percent :etas'
+			var bar = new ProgressBar(output("Downloading: [:bar] :percent :etas"), {
+			    complete: '\x1b[42m\x1b[1m \x1b[0m',
+			    incomplete: '\x1b[35m.\x1b[0m',
+			    width: 20,
+			    total: totalData
+			});
 			file.on("data", (c)=>{
 				bar.tick(c.length);
 			});
 		})
 	});
 	if (!downloaded) error("Unable to download files");
-	const spinner = ora({spinner: {interval: 80, frames: [output('Unzipping files'), output('Unzipping files.'), output('Unzipping files..'), output('Unzipping files...')]}}).start();
+	console.log(output("Unzipping files..."));
 	var temp;
 	if (finalName.indexOf(".xz") !== -1) {
-		temp = await new Promise((resolve)=>{
-			decompress(filePath, 'ffmpeg', {
-				plugins: [decompressTarxz()]
-			}).then((file)=>resolve(file));
-		});
+		temp = await decompressXZ(filePath);
 	} else {
-		temp = await new Promise((resolve)=>{
-			decompress(filePath, 'ffmpeg', {
-				plugins: [decompressUnzip()],
-			}).then((file)=>resolve(file));
-		});
+		temp = await decompressZip(filePath);
 	}
-	spinner.stop();
-	console.log(output("Unzipped file"));
+	console.log(output("Unzipped files"));
 	fs.unlinkSync(filePath);
-	fs.renameSync(`${__dirname}/ffmpeg/${temp[0].path}`, `${__dirname}/ffmpeg/${type}`);
+	fs.renameSync(temp, `${__dirname}/ffmpeg/${type}`);
 	console.log(output("FFmpeg downloaded!"));
 }
 if (process.argv.length !== 2) getPackage(process.argv[2], process.argv[3]);
