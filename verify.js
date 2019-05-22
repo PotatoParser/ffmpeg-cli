@@ -1,8 +1,7 @@
 const OS = process.platform;
 const BIT = process.arch;
-const chalk = require("chalk");
 function error(text){
-	console.log(chalk.bold.red("ERROR! ") + chalk.white("[ffmpeg-cli]") + " " + new Error(text));
+	console.error(`\x1b[1m\x1b[31mERROR! \x1b[0m\x1b[37m[ffmpeg-cli]\x1b[0m ${new Error(text)}`);
 }
 if (!(BIT === "x32" || BIT === "x64")) error("CPU architecture not supported");
 const allOS = {
