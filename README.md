@@ -7,6 +7,9 @@ const ffmpeg = require("ffmpeg-cli");
 ffmpeg.run("-version");
 console.log(ffmpeg.runSync("-version"));
 ```
+## Hassle Free!
+No need to install other programs as ffmpeg-cli will download and unzip necessary binaries for your OS!
+
 ## Supported OS
 + MacOS ~ 64 bit
 + Linux ~ 32/64 bit
