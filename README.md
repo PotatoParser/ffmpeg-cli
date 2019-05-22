@@ -1,5 +1,5 @@
 # ffmpeg-cli
-[![Build Status](https://travis-ci.com/PotatoParser/ffmpeg-cli.svg?branch=master)](https://travis-ci.com/PotatoParser/ffmpeg-cli.svg?branch=master)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg?style=flat-square)](https://travis-ci.com/PotatoParser/ffmpeg-cli) [![Node v10](https://img.shields.io/badge/Node-v10-brightgreen.svg?style=flat-square)](https://nodejs.org/en/download/) [![Node v11](https://img.shields.io/badge/Node-v11-brightgreen.svg?style=flat-square)](https://nodejs.org/en/download/)
 
 A simple way of implementing FFmpeg regardless of OS
 ```javascript
