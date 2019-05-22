@@ -3,5 +3,5 @@ os:
  - "linux"
  - "osx"
 node_js:
- - "node"
+ - 11
  - 10
