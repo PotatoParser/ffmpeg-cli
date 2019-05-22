@@ -12,6 +12,12 @@ console.log(ffmpeg.runSync("-version"));
 + Linux ~ 32/64 bit
 + Windows ~ 32/64 bit
 
+## FFmpeg Path
+Returns the path of ffmpeg executable
+```javascript
+ffmpeg.path;
+// Ex: C:\Users\PotatoParser\Desktop\NodeJS\ffmpeg-cli\ffmpeg\win32x64\bin\ffmpeg.exe
+```
 ## Synchronous Commands
 Returns the output from FFmpeg
 ```javascript

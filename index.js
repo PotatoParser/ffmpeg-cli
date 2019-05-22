@@ -2,8 +2,9 @@ const cp = require("child_process");
 const fs = require("fs");
 const system = require(__dirname + "/verify.js");
 if (!fs.existsSync(system.path)) cp.execSync(`node --no-warnings ${__dirname}/download.js ${system.url} ${process.platform}${process.arch}`, {cwd: process.cwd(), stdio: "inherit"});
-class FFmpeg {
-	static async run(cmd){
+
+const FFmpeg = {
+	run: async(cmd)=>{
 		var temp = await new Promise((resolve, reject)=>{
 			var err = (data)=>{throw data;}
 			cp.exec(`"${system.path}" ${cmd}`, {encoding: "utf8"}, (error, out)=>{
@@ -13,8 +14,9 @@ class FFmpeg {
 		});
 		if (temp.code) throw temp;
 		return temp;
-	}
-	static runSync(cmd){
+	},
+	path: `${system.path}`,
+	runSync: (cmd)=>{
 		return cp.execSync(`"${system.path}" ${cmd}`, {encoding: "utf8"});
 	}
 }
