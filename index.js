@@ -7,7 +7,7 @@ const FFmpeg = {
 	run: async(cmd)=>{
 		var temp = await new Promise((resolve, reject)=>{
 			var err = (data)=>{throw data;}
-			cp.exec(`"${system.path}" ${cmd}`, {encoding: "utf8"}, (error, out)=>{
+			cp.exec(`"${system.path}" ${cmd}`, {env: {...process.env, NODE_ENV: NODE_ENV}, encoding: "utf8"}, (error, out)=>{
 				if (error) resolve(error);
 				else resolve(out);
 			});
@@ -17,7 +17,7 @@ const FFmpeg = {
 	},
 	path: `${system.path}`,
 	runSync: (cmd)=>{
-		return cp.execSync(`"${system.path}" ${cmd}`, {encoding: "utf8"});
+		return cp.execSync(`"${system.path}" ${cmd}`, {env: {...process.env, NODE_ENV: NODE_ENV}, encoding: "utf8"});
 	}
 }
 // Check for possible corruption
