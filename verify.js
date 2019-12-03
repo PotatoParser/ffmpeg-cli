@@ -18,17 +18,17 @@ const allOS = {
 	darwin: {
 		x64: {
 			url: "https://ffmpeg.zeranoe.com/builds/macos64/static/ffmpeg-latest-macos64-static.zip",
-			path: __dirname + "/ffmpeg/darwinx64/bin/ffmpeg"
+			path: __dirname + "/ffmpeg/ffmpeg-latest-macos64-static/bin/ffmpeg"
 		}
 	},
 	win32: {
 		x32: {
 			url: "https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-latest-win32-static.zip",
-			path: __dirname + "/ffmpeg/win32x32/bin/ffmpeg.exe"
+			path: __dirname + "/ffmpeg/ffmpeg-latest-win32-static/bin/ffmpeg.exe"
 		},
 		x64: {
 			url: "https://ffmpeg.zeranoe.com/builds/win64/static/ffmpeg-latest-win64-static.zip",
-			path: __dirname + "/ffmpeg/win32x64/bin/ffmpeg.exe"
+			path: __dirname + "/ffmpeg/ffmpeg-latest-win64-static/bin/ffmpeg.exe"
 		}
 	}
 }
