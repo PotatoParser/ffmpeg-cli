@@ -18,7 +18,7 @@ const allOS = {
 	darwin: {
 		x64: {
 			url: "https://ffmpeg.zeranoe.com/builds/macos64/static/ffmpeg-latest-macos64-static.zip",
-			path: __dirname + "/ffmpeg/ffmpeg-latest-macos64-static/bin/ffmpeg"
+			path: __dirname + "/ffmpeg/darwinx64/bin/ffmpeg"
 		}
 	},
 	win32: {
