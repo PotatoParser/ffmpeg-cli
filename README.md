@@ -36,5 +36,12 @@ ffmpeg.run(commands).then((result)=>{...}); // Only results
 ffmpeg.run(commands).then((result)=>{...}).catch((error)=>{...}); // Catches when errors found
 ```
 
+## FFmpeg Force Re-Download
+**Run to redownload (synchronously) ffmpeg files**
+Returns true if download is successful
+```javascript
+ffmpeg.forceDownload();
+```
+
 ## FFmpeg Documentation
 [FFmpeg's Official Documentation](https://www.ffmpeg.org/ffmpeg.html)
