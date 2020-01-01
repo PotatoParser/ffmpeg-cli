@@ -1,5 +1,5 @@
 # ffmpeg-cli
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg?style=flat-square)](https://travis-ci.com/PotatoParser/ffmpeg-cli) [![Node v10](https://img.shields.io/badge/Node-v10-brightgreen.svg?style=flat-square)](https://nodejs.org/en/download/) [![Node v11](https://img.shields.io/badge/Node-v11-brightgreen.svg?style=flat-square)](https://nodejs.org/en/download/)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg?style=flat-square)](https://travis-ci.com/PotatoParser/ffmpeg-cli) [![Node v10](https://img.shields.io/badge/Node-v10-brightgreen.svg?style=flat-square)](https://nodejs.org/fr/blog/release/v10.0.0/) [![Node v11](https://img.shields.io/badge/Node-v11-brightgreen.svg?style=flat-square)](https://nodejs.org/ko/blog/release/v11.0.0/) [![Node LTS](https://img.shields.io/badge/Node-v10-brightgreen.svg?style=flat-square)](https://nodejs.org/en/download/)
 
 A simple way of implementing FFmpeg regardless of OS
 ```javascript
@@ -38,6 +38,7 @@ ffmpeg.run(commands).then((result)=>{...}).catch((error)=>{...}); // Catches whe
 
 ## FFmpeg Force Re-Download
 **Run to redownload (synchronously) ffmpeg files**
+
 Returns true if download is successful
 ```javascript
 ffmpeg.forceDownload();
