@@ -1,5 +1,5 @@
 # ffmpeg-cli
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg?style=flat-square)](https://travis-ci.com/PotatoParser/ffmpeg-cli) [![Node v10](https://img.shields.io/badge/Node-v10-brightgreen.svg?style=flat-square)](https://nodejs.org/en/download/) [![Node v11](https://img.shields.io/badge/Node-v11-brightgreen.svg?style=flat-square)](https://nodejs.org/en/download/)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg?style=flat-square)](https://travis-ci.com/PotatoParser/ffmpeg-cli) [![Node LTS](https://img.shields.io/badge/Node-LTS-brightgreen.svg?style=flat-square)](https://nodejs.org/dist/latest-v10.x/) [![Node v10](https://img.shields.io/badge/Node-v10-brightgreen.svg?style=flat-square)](https://nodejs.org/en/download/)
 
 A simple way of implementing FFmpeg regardless of OS
 ```javascript
@@ -8,7 +8,7 @@ ffmpeg.run("-version");
 console.log(ffmpeg.runSync("-version"));
 ```
 ## Hassle Free!
-No need to install other programs as ffmpeg-cli will download and unzip necessary binaries for your OS!
+No need to install other programs as ffmpeg-cli will download and extract necessary binaries for your OS!
 
 ## Supported OS
 + MacOS ~ 64 bit
@@ -16,7 +16,7 @@ No need to install other programs as ffmpeg-cli will download and unzip necessar
 + Windows ~ 32/64 bit
 
 ## FFmpeg Path
-Returns the path of ffmpeg executable
+Returns the path of FFmpeg executable
 ```javascript
 ffmpeg.path;
 // Ex: C:\Users\PotatoParser\Desktop\NodeJS\ffmpeg-cli\ffmpeg\win32x64\bin\ffmpeg.exe
@@ -28,7 +28,7 @@ ffmpeg.runSync(commands);
 // Ex: ffmpeg.runSync(`-i input.jpg -vf scale=320:240 output.png`);
 ```
 ## Asynchronous Commands
-Returns a promise
+Returns a <Promise>
 ```javascript
 ffmpeg.run(commands);
 ffmpeg.run(commands).catch((error)=>{...}); // Catch errors
@@ -39,6 +39,7 @@ ffmpeg.run(commands).then((result)=>{...}).catch((error)=>{...}); // Catches whe
 ## FFmpeg Force Re-Download
 **Run to redownload (synchronously) ffmpeg files**
 Returns true if download is successful
+
 ```javascript
 ffmpeg.forceDownload();
 ```
