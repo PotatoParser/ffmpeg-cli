@@ -26,10 +26,10 @@
   },
   "homepage": "https://github.com/PotatoParser/ffmpeg-cli#readme",
   "dependencies": {
-    "extract-zip": "^1.6.7",
-    "lzma-native": "^4.0.6",
+    "extract-zip": "^2.0.0",
+    "lzma-native": "^6.0.1",
     "progress": "^2.0.3",
-    "request": "^2.88.0",
-    "tar": "^4.4.8"
+    "request": "^2.88.2",
+    "tar": "^6.0.2"
   }
 }
