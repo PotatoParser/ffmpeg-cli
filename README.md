@@ -28,7 +28,7 @@ ffmpeg.runSync(commands);
 // Ex: ffmpeg.runSync(`-i input.jpg -vf scale=320:240 output.png`);
 ```
 ## Asynchronous Commands
-Returns a <Promise>
+Returns a `Promise`
 ```javascript
 ffmpeg.run(commands);
 ffmpeg.run(commands).catch((error)=>{...}); // Catch errors
