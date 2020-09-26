@@ -1,6 +1,6 @@
 {
   "name": "ffmpeg-cli",
-  "version": "2.5.2",
+  "version": "2.6.0",
   "description": "ffmpeg with support for multiple OSs",
   "main": "./lib/index.js",
   "scripts": {
@@ -27,6 +27,7 @@
   "homepage": "https://github.com/PotatoParser/ffmpeg-cli#readme",
   "dependencies": {
     "adm-zip": "^0.4.14",
+    "follow-redirects": "^1.13.0",
     "lzma-native": "^5.0.1",
     "progress": "^2.0.3",
     "tar": "^6.0.2"

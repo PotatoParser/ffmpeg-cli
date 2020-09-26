@@ -13,7 +13,7 @@ No need to install other programs as ffmpeg-cli will download and extract necess
 ## Supported OS
 + MacOS ~ 64 bit
 + Linux ~ 32/64 bit
-+ Windows ~ 32/64 bit
++ Windows ~ [~~32/~~](https://github.com/PotatoParser/ffmpeg-cli/issues/9)64 bit
 
 ## FFmpeg Path
 Returns the path of FFmpeg executable
