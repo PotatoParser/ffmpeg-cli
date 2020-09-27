@@ -1,12 +1,15 @@
 {
   "name": "ffmpeg-cli",
-  "version": "2.6.0",
+  "version": "2.7.0",
   "description": "ffmpeg with support for multiple OSs",
   "main": "./lib/index.js",
   "scripts": {
     "test": "node test.js",
-    "postinstall": "node ./lib/download.js"
+    "postinstall": "node ./lib/download.js",
+    "lint": "eslint test.js ./lib/*",
+    "lint:fix": "eslint test.js ./lib/* --fix"
   },
+  "precommit": "lint",
   "keywords": [
     "ffmpeg",
     "video",
@@ -31,5 +34,9 @@
     "lzma-native": "^5.0.1",
     "progress": "^2.0.3",
     "tar": "^6.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.10.0",
+    "pre-commit": "^1.2.2"
   }
 }
