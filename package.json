@@ -9,6 +9,7 @@
     "lint": "eslint test.js ./lib/*",
     "lint:fix": "eslint test.js ./lib/* --fix"
   },
+  "precommit": "lint",
   "keywords": [
     "ffmpeg",
     "video",
@@ -35,6 +36,7 @@
     "tar": "^6.0.2"
   },
   "devDependencies": {
-    "eslint": "^7.10.0"
+    "eslint": "^7.10.0",
+    "pre-commit": "^1.2.2"
   }
 }
