@@ -1,3 +1,4 @@
 .travis.yml
+.eslintrc.yml
 node_modules
 ffmpeg

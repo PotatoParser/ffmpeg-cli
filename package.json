@@ -5,7 +5,9 @@
   "main": "./lib/index.js",
   "scripts": {
     "test": "node test.js",
-    "postinstall": "node ./lib/download.js"
+    "postinstall": "node ./lib/download.js",
+    "lint": "eslint test.js ./lib/*",
+    "lint:fix": "eslint test.js ./lib/* --fix"
   },
   "keywords": [
     "ffmpeg",
@@ -31,5 +33,8 @@
     "lzma-native": "^5.0.1",
     "progress": "^2.0.3",
     "tar": "^6.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.10.0"
   }
 }

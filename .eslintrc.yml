@@ -1,0 +1,284 @@
+env:
+  browser: true
+  es2020: true
+  node: true
+extends: 'eslint:recommended'
+parserOptions:
+  ecmaVersion: 11
+  sourceType: module
+rules:
+  indent:
+    - error
+    - tab
+  quotes:
+    - error
+    - single
+  semi:
+    - error
+    - always
+  no-async-promise-executor: off
+  no-ex-assign: off
+  no-cond-assign: off
+  no-inner-declarations: off
+  no-obj-calls: off
+  no-prototype-builtins: off
+  no-unreachable: off
+  no-unused-vars:
+    - warn
+    - vars: all
+      args: after-used
+      ignoreRestSiblings: false
+  no-this-before-super: off
+  no-loss-of-precision: error
+  no-template-curly-in-string: error
+  require-atomic-updates: error
+  array-callback-return: error
+  block-scoped-var: error
+  curly:
+    - error
+    - multi-or-nest
+    - consistent
+  default-case: error
+  default-case-last: error
+  default-param-last: error
+  dot-location:
+    - error
+    - property
+  dot-notation: error
+  eqeqeq:
+    - error
+    - smart
+  grouped-accessor-pairs:
+    - error
+    - getBeforeSet
+  max-classes-per-file:
+    - error
+    - 3
+  no-caller: error
+  no-constructor-return: error
+  no-div-regex: warn
+  no-else-return: error
+  no-empty-function:
+    - error
+    - allow:
+      - arrowFunctions
+  no-eq-null: error
+  no-eval:
+    - error
+    - allowIndirect: true
+  no-extra-bind: error
+  no-extra-label: error
+  no-floating-decimal: error
+  no-implicit-coercion:
+    - error
+    - allow:
+      - '!!'
+  no-implicit-globals: warn
+  no-implied-eval: error
+  no-invalid-this: error
+  no-iterator: error
+  no-labels: error
+  no-lone-blocks: error
+  no-loop-func: error
+  no-magic-numbers: warn
+  no-multi-spaces: error
+  no-multi-str: warn
+  no-new: error
+  no-new-func: error
+  no-new-wrappers: error
+  no-proto: error
+  no-script-url: error
+  no-self-compare: error
+  no-sequences: error
+  no-throw-literal: warn
+  no-unmodified-loop-condition: error
+  no-unused-expressions: error
+  no-useless-call: error
+  no-useless-concat: error
+  no-useless-return: error
+  no-void: error
+  prefer-promise-reject-errors: warn
+  prefer-regex-literals: error
+  radix:
+    - error
+    - as-needed
+  require-await: warn
+  wrap-iife: error
+  yoda: 
+    - error
+    - never
+    - exceptRange: true
+  strict: error
+  no-label-var: error
+  no-undef-init: error
+  no-undefined: error
+  no-use-before-define: warn
+  array-bracket-spacing:
+    - error
+    - never
+  array-element-newline:
+    - error
+    - consistent
+  block-spacing: error
+  brace-style: error
+  camelcase: error
+  capitalized-comments:
+    - error
+    - always
+  comma-dangle: error
+  comma-spacing: error
+  comma-style: error
+  computed-property-spacing: error
+  eol-last: error
+  func-call-spacing: error
+  func-name-matching:
+    - error
+    - always
+  func-names:
+    - error
+    - never
+  func-style:
+    - warn
+    - declaration
+    - allowArrowFunctions: true
+  function-call-argument-newline:
+    - error
+    - consistent
+  function-paren-newline:
+    - error
+    - consistent
+  id-length:
+    - warn
+    - min: 1
+      max: 15
+  implicit-arrow-linebreak: error
+  no-mixed-spaces-and-tabs:
+    - error
+    - smart-tabs
+  jsx-quotes:
+    - error
+    - prefer-single
+  key-spacing: error
+  keyword-spacing: error
+  linebreak-style:
+    - error
+    - windows
+  lines-around-comment:
+    - error
+    - beforeLineComment: true
+      allowBlockStart: true
+      allowClassStart: true
+      allowObjectStart: true
+      allowArrayStart: true
+  lines-between-class-members: error
+  max-depth: error
+  max-len:
+    - error
+    - code: 150
+  max-nested-callbacks: error
+  max-params:
+    - error
+    - max: 10
+  max-statements-per-line:
+    - error
+    - max: 5
+  multiline-comment-style:
+    - error
+    - separate-lines
+  multiline-ternary:
+    - error
+    - always-multiline
+  new-cap: error
+  new-parens:
+    - error
+    - always
+  newline-per-chained-call: error
+  no-array-constructor: error
+  no-bitwise:
+    - warn
+    - int32Hint: true
+  no-lonely-if: error
+  no-mixed-operators: error
+  no-multiple-empty-lines: error
+  no-negated-condition: error
+  no-nested-ternary: error
+  no-new-object: error
+  no-trailing-spaces: error
+  no-underscore-dangle: error
+  no-unneeded-ternary: error
+  no-whitespace-before-property: error
+  nonblock-statement-body-position: error
+  object-curly-newline:
+    - error
+    - minProperties: 1
+  object-curly-spacing:
+    - error
+    - always
+  object-property-newline: error
+  operator-assignment: error
+  operator-linebreak:
+    - error
+    - before
+  padded-blocks:
+    - error
+    - never
+  prefer-exponentiation-operator: error
+  quote-props:
+    - error
+    - as-needed
+  semi-spacing:
+    - error
+    - before: false
+      after: true
+  semi-style: error
+  space-before-blocks: error
+  space-before-function-paren:
+    - error
+    - anonymous: never
+      named: never
+      asyncArrow: always
+  space-in-parens:
+    - error
+    - never
+  space-infix-ops:
+    - error
+    - int32Hint: true
+  space-unary-ops:
+    - error
+    - words: true
+      nonwords: false
+  spaced-comment:
+    - error
+    - always
+  switch-colon-spacing: error
+  template-tag-spacing: error
+  unicode-bom: error
+  arrow-body-style:
+    - error
+    - as-needed
+  arrow-parens:
+    - error
+    - as-needed
+  arrow-spacing: error
+  generator-star-spacing: error
+  no-confusing-arrow:
+    - error
+    - allowParens: true
+  no-duplicate-imports: error
+  no-useless-computed-key:
+    - error
+    - enforceForClassMembers: true
+  no-useless-constructor: error
+  no-useless-rename: error
+  object-shorthand: error
+  prefer-arrow-callback: warn
+  prefer-const: error
+  prefer-spread: error
+  prefer-template: error
+  rest-spread-spacing:
+    - error
+    - never
+  template-curly-spacing:
+    - error
+    - never
+  yield-star-spacing: error
