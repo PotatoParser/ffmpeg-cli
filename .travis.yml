@@ -4,6 +4,4 @@ os:
  - "osx"
 node_js:
  - "lts/*"
- - 11
  - 10
-dist: trusty
