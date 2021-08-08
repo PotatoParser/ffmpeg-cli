@@ -33,7 +33,7 @@
     "follow-redirects": "^1.13.0",
     "lzma-native": "^6.0.1",
     "progress": "^2.0.3",
-    "tar": "^6.0.2"
+    "tar": "^6.1.6"
   },
   "devDependencies": {
     "eslint": "^7.10.0",
