@@ -30,13 +30,13 @@
   "homepage": "https://github.com/PotatoParser/ffmpeg-cli#readme",
   "dependencies": {
     "adm-zip": "^0.4.14",
-    "follow-redirects": "^1.13.0",
+    "follow-redirects": "^1.15.2",
     "lzma-native": "^6.0.1",
     "progress": "^2.0.3",
-    "tar": "^6.1.6"
+    "tar": "^6.1.11"
   },
   "devDependencies": {
-    "eslint": "^7.10.0",
+    "eslint": "^7.32.0",
     "pre-commit": "^1.2.2"
   }
 }
